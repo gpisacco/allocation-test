@@ -6,4 +6,4 @@ npm install -g npx
 
 # Execute
 - url needs to be between quotes
-npx  npx github:gpisacco/allocation-test 'http://url' 
+npx github:gpisacco/allocation-test 'http://url' 
