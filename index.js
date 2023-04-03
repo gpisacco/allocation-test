@@ -50,6 +50,11 @@ const printSimpleAllocation = (allocation, events) => {
 
     const dates = allocation.map((a) => a.date).filter((v, i, a) => a.indexOf(v) === i);
     const header = [''].concat(dates.map((d) => new Date(d).toISOString().slice(8, 13)));
+    //for each allocation that has turningPoint is true, add a * to the header
+    allocation.filter(a => a.turningPoint).forEach(a => {
+        const index = header.indexOf(new Date(a.date).toISOString().slice(8, 13))
+        header[index] = colors.green(header[index])
+    })
     table.push(header);
     locations.forEach((l) => {
         // find the events that contribute to the location
@@ -66,7 +71,7 @@ const printSimpleAllocation = (allocation, events) => {
         );
         table.push(row);
     });
-    console.log(table.toString());
+    console.log(table.toString() + '\n Header in ' + colors.green('GREEN') + ' indicates a turning point in the allocation' );
 };
 
 function printSimpleEventsTable(events) {
